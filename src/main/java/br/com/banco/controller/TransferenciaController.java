@@ -25,13 +25,11 @@ public class TransferenciaController {
   @Autowired
   private TransferenciaRepository transferenciaRepository;
 
-  // retorna todas as optionalTransferencia
   @GetMapping("/transferencias")
   public List<Transferencia> getAllTransferencias() {
     return transferenciaRepository.findAll();
   }
 
-  // retorna a transferencia por ID.
   @GetMapping("/transferencias/conta/{id}")
   public List<Transferencia> getTransferenciaById(@PathVariable long id ) {
     List<Transferencia> list = transferenciaRepository.findAll().stream().filter(transferencia -> transferencia.getContaId() == id).collect(Collectors.toList());
@@ -89,37 +87,4 @@ public class TransferenciaController {
       throw new HttpServerErrorException(HttpStatus.NOT_FOUND);
     }
   }
-
-  // update employee rest api
-  // @PutMapping("/employees/{id}")
-  // @ResponseBody
-  // public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails) {
-  //   Optional<Employee> optionalEmployee = employeeRepository.findById(id);
-  //   if (!optionalEmployee.isPresent()) {
-  //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  //   }
-
-  //   Employee employee = optionalEmployee.get();
-  //   employee.setFirstName(employeeDetails.getFirstName());
-  //   employee.setLastName(employeeDetails.getLastName());
-
-  //   Employee updatedEmployee = employeeRepository.save(employee);
-  //   return ResponseEntity.ok(updatedEmployee);
-  // }
-
-  // delete employee rest api
-  // @DeleteMapping("/employees/{id}")
-  // @ResponseBody
-  // public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id) {
-  //   Optional<Employee> optionalEmployee = employeeRepository.findById(id);
-  //   if (!optionalEmployee.isPresent()) {
-  //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  //   }
-
-  //   Employee employee = optionalEmployee.get();
-  //   employeeRepository.delete(employee);
-  //   Map<String, Boolean> response = new HashMap<>();
-  //   response.put("deleted", Boolean.TRUE);
-  //   return ResponseEntity.ok(response);
-  // }
 }
